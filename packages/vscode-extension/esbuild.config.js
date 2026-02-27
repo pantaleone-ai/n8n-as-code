@@ -2,7 +2,7 @@ const esbuild = require('esbuild');
 const fs = require('fs');
 const path = require('path');
 
-// Plugin to copy skills assets
+// Plugin to copy skills assets and CLI assets
 const copySkillsAssets = {
     name: 'copy-skills-assets',
     setup(build) {
@@ -24,21 +24,38 @@ const copySkillsAssets = {
 
             if (!fs.existsSync(sourceDir)) {
                 console.warn('⚠️  skills assets not found, skipping copy');
-                return;
+            } else {
+                // Create target directory
+                if (!fs.existsSync(targetDir)) {
+                    fs.mkdirSync(targetDir, { recursive: true });
+                }
+
+                // Copy JSON files
+                const files = fs.readdirSync(sourceDir).filter(f => f.endsWith('.json'));
+                for (const file of files) {
+                    const src = path.join(sourceDir, file);
+                    const dest = path.join(targetDir, file);
+                    fs.copyFileSync(src, dest);
+                    console.log(`✅ Copied ${file} to assets/`);
+                }
             }
 
-            // Create target directory
-            if (!fs.existsSync(targetDir)) {
-                fs.mkdirSync(targetDir, { recursive: true });
-            }
+            // Copy n8n-workflows.d.ts from CLI package to out/assets/
+            // so WorkspaceSetupService can find it at runtime inside the extension bundle.
+            const cliAssetSrc = fs.existsSync(
+                path.join(__dirname, 'node_modules', '@n8n-as-code', 'cli', 'dist', 'core', 'assets', 'n8n-workflows.d.ts')
+            )
+                ? path.join(__dirname, 'node_modules', '@n8n-as-code', 'cli', 'dist', 'core', 'assets', 'n8n-workflows.d.ts')
+                : path.join(__dirname, '..', 'cli', 'dist', 'core', 'assets', 'n8n-workflows.d.ts');
 
-            // Copy JSON files
-            const files = fs.readdirSync(sourceDir).filter(f => f.endsWith('.json'));
-            for (const file of files) {
-                const src = path.join(sourceDir, file);
-                const dest = path.join(targetDir, file);
-                fs.copyFileSync(src, dest);
-                console.log(`✅ Copied ${file} to assets/`);
+            const cliAssetDest = path.join(__dirname, 'out', 'assets', 'n8n-workflows.d.ts');
+
+            if (fs.existsSync(cliAssetSrc)) {
+                fs.mkdirSync(path.dirname(cliAssetDest), { recursive: true });
+                fs.copyFileSync(cliAssetSrc, cliAssetDest);
+                console.log(`✅ Copied n8n-workflows.d.ts to out/assets/`);
+            } else {
+                console.warn(`⚠️  n8n-workflows.d.ts not found at ${cliAssetSrc}, skipping copy`);
             }
         });
     }
@@ -92,7 +109,7 @@ const n8nacCliBuild = fs.existsSync(finalN8nacCliEntry) ? esbuild.build({
     entryPoints: [finalN8nacCliEntry],
     bundle: true,
     outfile: 'out/cli/index.js',
-    external: ['vscode', 'prettier'],
+    external: ['vscode'],
     format: 'cjs',
     platform: 'node',
     logOverride: {
