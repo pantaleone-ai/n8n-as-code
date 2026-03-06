@@ -403,22 +403,11 @@ export class AiContextGenerator {
       `  - Example: \`this.RAG.uses({ ai_embedding: this.Embedding.output, ai_vectorStore: this.VectorStore.output, ai_retriever: this.Retriever.output })\``,
       `- ❌ Never use \`.out().to()\` for AI sub-node connections`,
       ``,
-      `### HTTP Tool for AI Agents`,
-      `- ✅ Use \`n8n-nodes-base.httpRequestTool\` — the official HTTP Request Tool for AI agent workflows`,
-      `- ❌ Do NOT use \`@n8n/n8n-nodes-langchain.toolHttpRequest\` — this LangChain variant is known to be broken on many instances`,
-      `- The \`httpRequestTool\` node connects to an agent via \`ai_tool\`:`,
-      `  \`\`\`typescript`,
-      `  @node({ name: 'SearchUsers', type: 'n8n-nodes-base.httpRequestTool', version: /* highest available version from schema */, position: [500, 300] })`,
-      `  SearchUsers = {`,
-      `    url: 'https://api.example.com/users/search',`,
-      `    sendQuery: true,`,
-      `    queryParameters: {`,
-      `      parameters: [{ name: 'q', value: "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('q', 'Search term', 'string') }}" }]`,
-      `    },`,
-      `    toolDescription: 'Search users by query term in the q parameter.',`,
-      `  };`,
-      `  // Connect as tool: this.Agent.uses({ ai_tool: [this.SearchUsers.output] })`,
-      `  \`\`\``,
+      `### AI Tool Nodes`,
+      `- ✅ Search for the exact tool node first, then inspect its schema before configuring it`,
+      `- ✅ Tool nodes connect to agents via \`ai_tool: [this.Tool.output]\``,
+      `- ✅ Use the exact \`type\`, \`version\`, and parameter names returned by the schema`,
+      `- ❌ Do not rely on node-specific assumptions or older examples when configuring tools`,
       ``,
       `---`,
       ``,
@@ -658,26 +647,14 @@ ${this.getAiAgentWorkflowExampleCode()}
 - ✅ AI sub-nodes: \`this.Agent.uses({ ai_languageModel: this.Model.output })\`
 - ❌ Never use \`.out().to()\` for AI sub-node connections
 
-### HTTP Tool for AI Agents
+### AI Tool Nodes
 
-When you need an AI agent to make HTTP requests, **always use \`n8n-nodes-base.httpRequestTool\`**:
+When an AI agent uses tool nodes:
 
-- ✅ \`n8n-nodes-base.httpRequestTool\` — stable, official HTTP tool for AI agents
-- ❌ \`@n8n/n8n-nodes-langchain.toolHttpRequest\` — LangChain variant; broken on many n8n instances
-
-Example:
-\`\`\`typescript
-@node({ name: 'SearchUsers', type: 'n8n-nodes-base.httpRequestTool', version: /* highest available version from schema */, position: [500, 300] })
-SearchUsers = {
-  url: 'https://api.example.com/users/search',
-  sendQuery: true,
-  queryParameters: {
-    parameters: [{ name: 'q', value: "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('q', 'Search term', 'string') }}" }]
-  },
-  toolDescription: 'Search users. Use the q parameter to specify the search term.',
-};
-// Then connect: this.Agent.uses({ ai_tool: [this.SearchUsers.output] })
-\`\`\`
+- ✅ Search for the exact tool node first
+- ✅ Run \`npx --yes n8nac skills node-info <nodeName>\` before writing parameters
+- ✅ Connect tool nodes as arrays: \`this.Agent.uses({ ai_tool: [this.Tool.output] })\`
+- ❌ Do not assume tool parameter names or reuse stale node-specific guidance
 
 ## 🚀 Best Practices
 

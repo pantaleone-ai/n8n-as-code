@@ -89,48 +89,48 @@ describe('AiContextGenerator', () => {
         });
     });
 
-    describe('HTTP Tool Guidance (Integration)', () => {
-        test('AGENTS.md should recommend n8n-nodes-base.httpRequestTool', async () => {
+    describe('AI Tool Guidance (Integration)', () => {
+        test('AGENTS.md should include generic ai_tool connection guidance', async () => {
             await generator.generate(tempDir, '1.0.0');
 
             const agentsContent = fs.readFileSync(path.join(tempDir, 'AGENTS.md'), 'utf-8');
-            expect(agentsContent).toContain('n8n-nodes-base.httpRequestTool');
+            expect(agentsContent).toContain('### AI Tool Nodes');
+            expect(agentsContent).toContain('ai_tool: [this.Tool.output]');
         });
 
-        test('AGENTS.md should warn against @n8n/n8n-nodes-langchain.toolHttpRequest', async () => {
+        test('AGENTS.md should avoid node-specific HTTP tool warnings', async () => {
             await generator.generate(tempDir, '1.0.0');
 
             const agentsContent = fs.readFileSync(path.join(tempDir, 'AGENTS.md'), 'utf-8');
-            expect(agentsContent).toContain('@n8n/n8n-nodes-langchain.toolHttpRequest');
-            // The warning must use a negative signal (❌ or "Do NOT" or "broken")
-            expect(agentsContent).toMatch(/❌.*toolHttpRequest|toolHttpRequest.*broken|Do NOT use.*toolHttpRequest/s);
+            expect(agentsContent).not.toContain('@n8n/n8n-nodes-langchain.toolHttpRequest');
+            expect(agentsContent).not.toContain('### HTTP Tool for AI Agents');
         });
 
-        test('AGENTS.md should include the httpRequestTool code example with ai_tool connection', async () => {
+        test('AGENTS.md should emphasize schema-first tool configuration', async () => {
             await generator.generate(tempDir, '1.0.0');
 
             const agentsContent = fs.readFileSync(path.join(tempDir, 'AGENTS.md'), 'utf-8');
             expect(agentsContent).toContain('ai_tool');
-            expect(agentsContent).toContain('$fromAI(');
-            expect(agentsContent).toContain('sendQuery');
+            expect(agentsContent).toContain('inspect its schema before configuring it');
+            expect(agentsContent).toContain('exact `type`, `version`, and parameter names returned by the schema');
         });
 
-        test('getSkillContent() should recommend n8n-nodes-base.httpRequestTool', () => {
+        test('getSkillContent() should include generic ai_tool guidance', () => {
             const content = generator.getSkillContent();
-            expect(content).toContain('n8n-nodes-base.httpRequestTool');
+            expect(content).toContain('### AI Tool Nodes');
+            expect(content).toContain('this.Agent.uses({ ai_tool: [this.Tool.output] })');
         });
 
-        test('getSkillContent() should warn against the langchain toolHttpRequest variant', () => {
+        test('getSkillContent() should avoid node-specific HTTP tool warnings', () => {
             const content = generator.getSkillContent();
-            expect(content).toContain('@n8n/n8n-nodes-langchain.toolHttpRequest');
-            expect(content).toMatch(/❌.*toolHttpRequest|toolHttpRequest.*broken/s);
+            expect(content).not.toContain('@n8n/n8n-nodes-langchain.toolHttpRequest');
+            expect(content).not.toContain('### HTTP Tool for AI Agents');
         });
 
-        test('getSkillContent() should include the httpRequestTool code example', () => {
+        test('getSkillContent() should require schema lookup for tool nodes', () => {
             const content = generator.getSkillContent();
-            expect(content).toContain('$fromAI(');
-            expect(content).toContain('sendQuery');
             expect(content).toContain('ai_tool');
+            expect(content).toContain('node-info <nodeName>');
         });
     });
 });
