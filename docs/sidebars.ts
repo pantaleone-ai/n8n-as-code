@@ -65,6 +65,11 @@ const sidebars: SidebarsConfig = {
         },
         {
           type: 'doc',
+          id: 'usage/openclaw',
+          label: 'OpenClaw Plugin',
+        },
+        {
+          type: 'doc',
           id: 'usage/claude-plugin-privacy',
           label: 'Claude Plugin Privacy',
         },

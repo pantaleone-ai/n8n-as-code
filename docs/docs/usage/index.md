@@ -1,7 +1,7 @@
 ---
 sidebar_position: 1
 title: Usage Guides
-description: Learn how to use n8n-as-code with VS Code Extension and CLI. Guides for visual editing, automation, and workflow management.
+description: Learn how to use n8n-as-code with VS Code, Claude Code, OpenClaw, and the CLI. Guides for visual editing, automation, and workflow management.
 ---
 
 # Usage Guides
@@ -18,6 +18,7 @@ This section is organized by the primary user-facing tools:
 | **[CLI](/docs/usage/cli)** | Command-line interface | Automation, scripting, CI/CD integration |
 | **[Skills CLI](/docs/usage/skills)** | AI tools and node schemas | AI coding assistants, node search, schema retrieval |
 | **[Claude Plugin](/docs/usage/claude-skill)** | Claude Code plugin | High-level workflow creation, updates, and fixes through Claude |
+| **[OpenClaw Plugin](/docs/usage/openclaw)** | OpenClaw plugin | Workspace bootstrap, prompt grounding, and workflow operations inside OpenClaw |
 
 ## 🎨 Choosing the Right Tool
 
@@ -146,6 +147,12 @@ n8nac push workflows/instance/project/workflow.workflow.ts
 3. Ask Claude high-level workflow requests
 4. See [Claude Plugin Guide](/docs/usage/claude-skill) for details
 
+### 5. OpenClaw Plugin
+1. Install the plugin: `openclaw plugins install @n8n-as-code/openclaw-plugin`
+2. Run the setup wizard: `openclaw n8nac:setup`
+3. Restart the gateway: `openclaw gateway restart`
+4. See the [OpenClaw Plugin Guide](/docs/usage/openclaw) for details
+
 ## 🔧 Advanced Features
 
 ### Multi-Instance Management
@@ -169,6 +176,7 @@ Explore the specific guides for each tool:
 - **[VS Code Extension Guide](/docs/usage/vscode-extension)**: Learn about visual editing, git-like sync, and advanced features
 - **[CLI Guide](/docs/usage/cli)**: Master command-line usage, automation, and scripting
 - **[Skills CLI Guide](/docs/usage/skills)**: Use AI tools for node search and schema retrieval
+- **[OpenClaw Plugin Guide](/docs/usage/openclaw)**: Set up the OpenClaw-native plugin and workspace bootstrap flow
 
 ## 🔍 Internal Components
 

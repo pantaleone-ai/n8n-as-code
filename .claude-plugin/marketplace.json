@@ -16,7 +16,7 @@
       "author": {
         "name": "Etienne Lescot"
       },
-      "homepage": "https://etiennelescot.github.io/n8n-as-code/docs/usage/claude-skill/",
+      "homepage": "https://n8nascode.dev/docs/usage/claude-skill/",
       "repository": "https://github.com/EtienneLescot/n8n-as-code",
       "license": "Apache-2.0",
       "category": "automation",

@@ -189,7 +189,7 @@ jobs:
             }
           }
 
-          const releasePkg = plan.packages.find(pkg => pkg.name === 'n8n-as-code' && pkg.changed);
+          const releasePkg = plan.packages.find(pkg => pkg.name === 'n8nac' && pkg.changed);
           if (releasePkg) {
             const repoTag = `v${releasePkg.targetVersion}`;
             try {
@@ -209,7 +209,7 @@ jobs:
           const fs = require('fs');
 
           const plan = JSON.parse(fs.readFileSync('release-plan.json', 'utf8'));
-          const pkg = plan.packages.find(item => item.name === 'n8n-as-code');
+          const pkg = plan.packages.find(item => item.name === 'n8nac');
           const changedPackages = plan.packages.filter(item => item.changed);
 
           if (!pkg?.changed) {
@@ -263,8 +263,8 @@ jobs:
           const version = pkg.targetVersion;
           const tag = `v${version}`;
           const title = version === '1.0.0'
-            ? "🚀 v1.0.0 - The 'State of the Art' Release"
-            : `n8n as code v${version}`;
+            ? "🚀 n8n-as-code v1.0.0 - The 'State of the Art' Release"
+            : `n8n-as-code v${version}`;
 
           const notesLines = [
             `## n8n-as-code ${version}`,

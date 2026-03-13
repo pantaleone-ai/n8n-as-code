@@ -1,7 +1,7 @@
 ---
 sidebar_position: 4
 title: Claude Plugin
-description: Install n8n-as-code in Claude Code today via the custom store path, or use the local MCP server in Claude Desktop.
+description: Install n8n-as-code in Claude Code through the repo-hosted marketplace, or use the local MCP server in Claude Desktop.
 ---
 
 # Claude Plugin
@@ -77,7 +77,7 @@ For marketplace and directory submissions, this is the correct **Link to plugin*
 The public documentation page for the plugin is:
 
 ```text
-https://etiennelescot.github.io/n8n-as-code/docs/usage/claude-skill/
+https://n8nascode.dev/docs/usage/claude-skill/
 ```
 
 This is the correct **Plugin homepage** field for submissions.
@@ -86,13 +86,13 @@ When submitting to community registries such as **Glama** or **MCP-get**, use:
 
 - **Repository / source URL** → `https://github.com/EtienneLescot/n8n-as-code`
 - **Installable plugin root** → `plugins/claude/n8n-as-code/`
-- **Homepage / docs URL** → `https://etiennelescot.github.io/n8n-as-code/docs/usage/claude-skill/`
+- **Homepage / docs URL** → `https://n8nascode.dev/docs/usage/claude-skill/`
 - **Current release channel** → `Beta / Pending Review`
 
 The public privacy policy page for submissions is:
 
 ```text
-https://etiennelescot.github.io/n8n-as-code/docs/usage/claude-plugin-privacy/
+https://n8nascode.dev/docs/usage/claude-plugin-privacy/
 ```
 
 This is the correct **Privacy policy URL** field for marketplace submissions.

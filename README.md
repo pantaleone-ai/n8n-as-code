@@ -7,12 +7,12 @@
 **GitOps · AI Skills · TypeScript Workflows · VS Code · Claude Code · OpenClaw**
 
 [![CI](https://github.com/EtienneLescot/n8n-as-code/actions/workflows/ci.yml/badge.svg)](https://github.com/EtienneLescot/n8n-as-code/actions/workflows/ci.yml)
-[![Documentation](https://github.com/EtienneLescot/n8n-as-code/actions/workflows/docs.yml/badge.svg)](https://etiennelescot.github.io/n8n-as-code/)
+[![Documentation](https://github.com/EtienneLescot/n8n-as-code/actions/workflows/docs.yml/badge.svg)](https://n8nascode.dev/)
 [![VS Code Marketplace](https://img.shields.io/visual-studio-marketplace/v/etienne-lescot.n8n-as-code?label=VS%20Code&logo=visualstudiocode)](https://marketplace.visualstudio.com/items?itemName=etienne-lescot.n8n-as-code)
 [![Open VSX](https://img.shields.io/open-vsx/v/etienne-lescot/n8n-as-code?label=Open%20VSX&logo=eclipseide)](https://open-vsx.org/extension/etienne-lescot/n8n-as-code)
 [![npm: cli](https://img.shields.io/npm/v/@n8n-as-code/cli?label=cli&logo=npm)](https://www.npmjs.com/package/@n8n-as-code/cli)
 [![npm: skills](https://img.shields.io/npm/v/@n8n-as-code/skills?label=skills&logo=npm)](https://www.npmjs.com/package/@n8n-as-code/skills)
-[![Claude Code](https://img.shields.io/badge/Claude%20Code-Beta%20%2F%20Pending%20Review-orange)](https://etiennelescot.github.io/n8n-as-code/docs/usage/claude-skill/)
+[![Claude Code](https://img.shields.io/badge/Claude%20Code-Beta%20%2F%20Pending%20Review-orange)](https://n8nascode.dev/docs/usage/claude-skill/)
 [![License: Apache-2.0](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](https://www.apache.org/licenses/LICENSE-2.0)
 
 <br>
@@ -27,7 +27,7 @@ Zero external calls. Zero latency. Zero hallucination.
 
 <br>
 
-[**📖 Documentation**](https://etiennelescot.github.io/n8n-as-code/) · [**🚀 Getting Started**](https://etiennelescot.github.io/n8n-as-code/docs/getting-started) · [**🧠 AI Skills**](https://etiennelescot.github.io/n8n-as-code/docs/usage/skills)
+[**📖 Documentation**](https://n8nascode.dev/) · [**🚀 Getting Started**](https://n8nascode.dev/docs/getting-started/) · [**🧠 AI Skills**](https://n8nascode.dev/docs/usage/skills/)
 
 </div>
 
@@ -39,61 +39,71 @@ Choose the entry point that matches how you already work.
 
 <table>
 <tr>
-<td width="33%" valign="top">
+<td width="50%" valign="top">
 
-### 💻 VS Code, Cursor, Windsurf
+### 💻 VS Code / Cursor
+Visual workflow view inside the editor.
 
-```text
-Install from the VS Code Marketplace or Open VSX
-```
+**Best for:** VS Code, Cursor, Windsurf, Antigravity
 
-```text
-Open the n8n view
-```
-
-```text
-Enter Host + API Key
-```
+**Setup**  
+Install from the VS Code Marketplace or Open VSX.  
+Open the `n8n` view.  
+Enter your host and API key.
 
 [VS Code Marketplace](https://marketplace.visualstudio.com/items?itemName=etienne-lescot.n8n-as-code) · [Open VSX](https://open-vsx.org/extension/etienne-lescot/n8n-as-code)
 
 </td>
-<td width="33%" valign="top">
+<td width="50%" valign="top">
 
 ### ✴️ Claude Code
 
-```bash
-/plugin marketplace add EtienneLescot/n8n-as-code
-```
+Plugin-driven workflow work with Claude.
 
-```bash
-/plugin install n8n-as-code@n8nac-marketplace
-```
+**Best for:** agent-led editing with marketplace install
 
-```bash
-npx --yes n8nac init
-```
+**Run**  
+<code>/plugin marketplace add <wbr>EtienneLescot/n8n-as-code</code><br>
+<code>/plugin install <wbr>n8n-as-code@n8nac-marketplace</code><br>
+<code>npx --yes n8nac init</code>
 
-[Claude setup docs](https://etiennelescot.github.io/n8n-as-code/docs/usage/claude-skill/)
+[Claude setup docs](https://n8nascode.dev/docs/usage/claude-skill/)
 
 </td>
-<td width="33%" valign="top">
+</tr>
+<tr>
+<td width="50%" valign="top">
 
 ### 🦞 OpenClaw
 
-```bash
-openclaw plugins install @n8n-as-code/openclaw-plugin
-```
+OpenClaw-native plugin and workspace bootstrap flow.
 
-```bash
-openclaw n8nac:setup
-```
+**Best for:** OpenClaw users who want built-in grounding and setup
 
-```bash
-openclaw gateway restart
-```
+**Run**  
+<code>openclaw plugins install <wbr>@n8n-as-code/openclaw-plugin</code><br>
+<code>openclaw n8nac:setup</code><br>
+<code>openclaw gateway restart</code>
 
-[OpenClaw plugin guide](plugins/openclaw/n8n-as-code/README.md)
+[OpenClaw setup docs](https://n8nascode.dev/docs/usage/openclaw/)
+
+</td>
+<td width="50%" valign="top">
+
+### ⌨️ CLI
+
+Explicit terminal-first workflow for sync and automation.
+
+**Best for:** scripts, CI, GitOps pipelines, direct workflow operations
+
+**Run**  
+<code>npx --yes n8nac init</code><br>
+.
+
+.
+
+
+[Full Getting Started Guide](https://n8nascode.dev/docs/getting-started/)
 
 </td>
 </tr>
@@ -102,37 +112,10 @@ openclaw gateway restart
 > **Then simply tell your agent what you want to do with your n8n workflows.**
 > Build new flows, update existing ones, search nodes and templates, validate changes, pull from n8n, push updates, and keep everything in sync.
 
-### ⌨️ CLI
-
-Prefer a more explicit terminal workflow? The CLI stays the shared backbone behind every integration.
-
-```bash
-npx --yes n8nac init
-npx --yes n8nac list
-npx --yes n8nac pull <workflow-id>
-npx --yes n8nac push my-workflow.workflow.ts
-```
-
-Best for scripts, CI, GitOps pipelines, and direct sync operations.
-
-📖 [Full Getting Started Guide](https://etiennelescot.github.io/n8n-as-code/docs/getting-started)
-
 ---
+## MCP Clients (Claude Desktop) :
 
-## 🛍️ Claude Custom Store (Beta / Pending Review)
-
-While the official Claude Code review is still pending, the repository already provides an **alternative marketplace** for Claude Code:
-
-```text
-/plugin marketplace add EtienneLescot/n8n-as-code
-/plugin install n8n-as-code@n8nac-marketplace
-```
-
-That is the recommended Claude Code install path right now.
-
-The Claude plugin uses the same `n8nac` CLI for workspace setup and workflow operations, so natural-language edits and terminal sync stay aligned.
-
-If you are using Claude Desktop or another MCP client instead of Claude Code, point it at the local MCP server with:
+If you are using Claude Desktop or another MCP client, point it at the local MCP server with:
 
 ```json
 {
@@ -145,14 +128,12 @@ If you are using Claude Desktop or another MCP client instead of Claude Code, po
 }
 ```
 
-Initialize your workspace first so Claude has both the sync config and AI context it needs:
+Initialize your workspace first so it has both the sync config and AI context it needs:
 
 ```bash
 npx --yes n8nac init
 npx --yes n8nac update-ai
 ```
-
-➡️ Full instructions, config-path notes, and optional local-assets overrides: [Claude Plugin / Custom Store docs](https://etiennelescot.github.io/n8n-as-code/docs/usage/claude-skill/)
 
 ---
 
@@ -219,7 +200,7 @@ npx n8nac push my-workflow.workflow.ts      # Push local → remote
 npx n8nac resolve <id> --mode keep-current  # Explicit conflict resolution
 ```
 
-**3-way merge** conflict detection · **Multi-instance** support · **Push-on-save** in VS Code
+**3-way merge** conflict detection · **Multi-instance** support
 
 ---
 
@@ -268,11 +249,11 @@ n8nac pull <id> > workflow.json && n8nac convert workflow.json --format typescri
 
 ---
 
-## 🎨 VS Code Extension
+## 🎨 VS Code / Cursor Extension
 
 > **Visual editing without leaving your IDE.** A dedicated sidebar, embedded n8n canvas, and one-click sync.
 
-1. Install from [VS Code Marketplace](https://marketplace.visualstudio.com/items?itemName=etienne-lescot.n8n-as-code)
+1. Install from [VS Code Marketplace](https://marketplace.visualstudio.com/items?itemName=etienne-lescot.n8n-as-code) or [OpenVSX Marketplace](https://open-vsx.org/extension/etienne-lescot/n8n-as-code)
 2. Click the **n8n** icon in the Activity Bar
 3. Configure your instance → Start editing
 
@@ -358,6 +339,6 @@ Third-party community workflow metadata and downloadable workflow files remain s
 
 **If n8n-as-code saves you time, give us a ⭐ — it helps more than you think.**
 
-[⭐ Star on GitHub](https://github.com/EtienneLescot/n8n-as-code) · [📖 Documentation](https://etiennelescot.github.io/n8n-as-code/) · [🐛 Report a Bug](https://github.com/EtienneLescot/n8n-as-code/issues)
+[⭐ Star on GitHub](https://github.com/EtienneLescot/n8n-as-code) · [📖 Documentation](https://n8nascode.dev/) · [🐛 Report a Bug](https://github.com/EtienneLescot/n8n-as-code/issues)
 
 </div>

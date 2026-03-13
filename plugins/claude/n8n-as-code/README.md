@@ -42,7 +42,7 @@ For Claude Desktop or other MCP clients, use:
 }
 ```
 
-Full documentation: https://etiennelescot.github.io/n8n-as-code/docs/usage/claude-skill/
+Full documentation: https://n8nascode.dev/docs/usage/claude-skill/
 
 ## Source Repository
 
